@@ -65,6 +65,26 @@ public class MarkovWordModel implements IMarkovModel
 		return sb.toString().trim();
 	}
 	
+	private HashMap<String, ArrayList<String>> map_builder()
+	{
+		HashMap<String, ArrayList<String>> store_map = new HashMap<>();
+		int total_num = myText.length;
+		for (int idx = 0; idx < total_num - order; idx +=1)
+		{
+			WordGram current_gram = new WordGram(myText, idx, order);
+			String current_gram_str = current_gram.toString();
+			if (!store_map.containsKey(current_gram_str))
+			{
+				ArrayList<String> current_follows = new ArrayList<>();
+				store_map.put(current_gram_str, current_follows);
+			}
+		}
+		WordGram tail_gram = new WordGram(myText, total_num - order, order);  
+		String tail_str = tail_gram.toString();
+		store_map.put(tail_str, null);
+		return store_map;
+	}
+	
 	private void string_builder_with_word_gram(StringBuilder input_sb, WordGram word_to_add)
 	{
 		for (int idx = 0; idx < word_to_add.length(); idx +=1)
