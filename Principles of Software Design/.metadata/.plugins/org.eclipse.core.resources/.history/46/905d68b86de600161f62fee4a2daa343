@@ -1,0 +1,11 @@
+
+public class test_console {
+	public static void main(String[] args)
+	{	
+		String test_string = "this is just a test yes this is a simple test";
+		MarkovWordOne test_one = new MarkovWordOne();
+		test_one.setTraining(test_string);
+		test_one.getFollows("this");
+	}
+
+}

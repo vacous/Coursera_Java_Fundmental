@@ -1,0 +1,6 @@
+INDEX VERSION 1.129+C:\Users\Administrator\Documents\GitHub\Coursera_Java_Fundmental\Principles of Software Design\.metadata\.plugins\org.eclipse.jdt.core
+3772775950.index
+578229289.index
+1433412799.index
+1196049464.index
+3482125727.index

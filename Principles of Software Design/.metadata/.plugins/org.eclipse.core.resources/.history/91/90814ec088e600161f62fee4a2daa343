@@ -1,0 +1,22 @@
+import edu.duke.FileResource;
+
+public class test_console {
+	public static void main(String[] args)
+	{	
+		FileResource test_file = new FileResource("data/confucius.txt");
+		String test_string = "This is a test";
+//		String test_string = test_file.asString();
+		MarkovWordModel test_model = new MarkovWordModel(1);
+		String[] test_gram_word = new String[1];
+		test_gram_word[0] = "This";
+		WordGram test_gram = new WordGram(test_gram_word, 0, 1);
+		test_model.setTraining(test_string);
+		test_model.getFollows(test_gram);
+//		test_model.setRandom(621);
+		System.out.println(test_model.getRandomText(20));
+
+		
+		
+	}
+
+}

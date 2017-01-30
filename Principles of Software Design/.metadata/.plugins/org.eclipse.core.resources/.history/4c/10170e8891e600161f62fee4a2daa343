@@ -1,0 +1,73 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+
+public class EfficientMarkovModel extends AbstractMarkovModel{
+
+	private int key_length;
+	public EfficientMarkovModel(int input_length) {
+		key_length = input_length;
+		myRandom = new Random();
+	}
+	
+	public void setRandom(int seed){
+		myRandom = new Random(seed);
+	}
+	
+	public String getRandomText(int numChars){
+		StringBuilder sb = new StringBuilder();
+		int index = myRandom.nextInt(myText.length() - key_length);
+		String key = myText.substring(index, index + key_length);
+		sb.append(key);
+		HashMap<String, ArrayList<String>> store_map = new HashMap<>();
+		for (int idx = 0; idx < numChars - key_length; idx += 1)
+		{
+			ArrayList<String> follows = new ArrayList<>();
+			if ( !store_map.containsKey(key))
+			{
+				follows = get_follows(key);
+				store_map.put(key, follows);
+			}
+			else
+			{
+				follows =  store_map.get(key);
+			}
+			if ( follows.size() != 0)
+			{	
+				index = myRandom.nextInt(follows.size());
+				String next = follows.get(index);
+				sb.append(next);
+				key = key.substring(1) + next; 
+			}
+		}
+		for (String each_key: store_map.keySet())
+		{
+			System.out.println("The key: " + each_key);
+			ArrayList<String> follows = store_map.get(each_key);
+			for (String each: follows)
+			{
+				System.out.println(each);
+			}
+			System.out.println("-------------");
+ 		}
+		
+		System.out.println("The HashMap size is: " + store_map.size());
+		System.out.println("The largest length: " + largest_size(store_map));
+		return sb.toString();
+	}
+	
+	private int largest_size(HashMap<String, ArrayList<String>> input_map)
+	{
+		int max_len = 0;
+		for (String each_key: input_map.keySet())
+		{
+			ArrayList<String> current_array = input_map.get(each_key);
+			int current_length = current_array.size();
+			if ( current_length > max_len )
+			{
+				max_len = current_length;
+			}
+		}
+		return max_len;
+	}
+}

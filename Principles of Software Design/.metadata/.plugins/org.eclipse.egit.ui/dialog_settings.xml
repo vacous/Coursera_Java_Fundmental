@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="GitCommitMessageComponent">
+		<list key="C:\Users\Administrator\Documents\GitHub\Coursera_Java_Fundmental\.git">
+			<item value="false"/>
+			<item value="vacous &lt;vaocus@gmail.com&gt;"/>
+			<item value="Start "/>
+			<item value="vacous &lt;vaocus@gmail.com&gt;"/>
+			<item value="588e6f5dc66a2fc9959b570c8f768234d5c3be7f"/>
+		</list>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
+		<item value="200,200" key="STAGING_SASH_FORM_WEIGHT"/>
+		<item value="false" key="sortItemState"/>
+		<item value="200,200" key="HORIZONTAL_SASH_FORM_WEIGHT"/>
+	</section>
+</section>

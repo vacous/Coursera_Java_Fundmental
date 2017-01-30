@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Random;
+
+import javax.print.attribute.HashPrintServiceAttributeSet;
 
 public class EfficientMarkovModel extends AbstractMarkovModel{
 
@@ -19,27 +22,64 @@ public class EfficientMarkovModel extends AbstractMarkovModel{
 		int index = myRandom.nextInt(myText.length() - key_length);
 		String key = myText.substring(index, index + key_length);
 		sb.append(key);
-		HashMap<String, ArrayList<String>> store_map = new HashMap<>();
+		
+		HashMap<String, ArrayList<String>> store_map = map_builder();
 		for (int idx = 0; idx < numChars - key_length; idx += 1)
 		{
-			ArrayList<String> follows = new ArrayList<>();
-			if ( !store_map.containsKey(key))
+			ArrayList<String> current_follows = store_map.get(key);
+			if (current_follows == null)
 			{
-				follows = get_follows(key);
-				store_map.put(key, follows);
-			}
-			else
-			{
-				follows =  store_map.get(key);
-			}
-			if ( follows.size() == 0)
 				break;
-			index = myRandom.nextInt(follows.size());
-			String next = follows.get(index);
-			sb.append(next);
-			key = key.substring(1) + next; 
-		}
+			}
+			index = myRandom.nextInt(current_follows.size());
+			String next_char = current_follows.get(index);
+			sb.append(next_char);
+			key = key.substring(1) + next_char;
+ 		}
+		
+		System.out.println("The HashMap size is: " + store_map.size());
+		System.out.println("The largest length: " + largest_size(store_map));
 		return sb.toString();
 	}
-
+	
+	private HashMap<String, ArrayList<String>> map_builder()
+	{
+		HashMap<String, ArrayList<String>> store_map = new HashMap<>();
+		HashSet<String> appear_string = new HashSet<>();
+		
+		for (int idx = 0; idx < myText.length() - key_length; idx += 1)
+		{
+			String current_sub = myText.substring(idx, idx + key_length);
+			appear_string.add(current_sub);
+		}
+		appear_string.add(myText.substring(myText.length() - key_length));
+		int counter = 0;
+		for (String each_appear: appear_string)
+		{
+			ArrayList<String> follows = get_follows(each_appear);
+			store_map.put(each_appear, follows);
+			counter += 1;
+			System.out.println(counter);
+		}
+		return store_map;
+	}
+	
+	private int largest_size(HashMap<String, ArrayList<String>> input_map)
+	{
+		int max_len = 0;
+		for (String each_key: input_map.keySet())
+		{
+			ArrayList<String> current_array = input_map.get(each_key);
+			int current_length = 0;
+			if ( current_array != null)
+			{
+				current_length = current_array.size();
+			}
+			if ( current_length > max_len )
+			{
+				max_len = current_length;
+			}
+		}
+		return max_len;
+	}
 }

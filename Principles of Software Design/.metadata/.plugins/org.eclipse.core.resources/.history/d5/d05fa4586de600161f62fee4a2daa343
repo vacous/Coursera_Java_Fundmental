@@ -1,0 +1,9 @@
+
+public class test_console {
+	public static void main(String[] args)
+	{
+		MarkovWordOne test_one = new MarkovWordOne();
+		test_one.testIndexof();
+	}
+
+}

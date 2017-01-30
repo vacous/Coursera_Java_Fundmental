@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.lang.IndexOutOfBoundsException"/>
+<fullyQualifiedTypeName name="MarkovWordOne"/>
+<fullyQualifiedTypeName name="edu.duke.FileResource"/>
+<fullyQualifiedTypeName name="IMarkovModel"/>
+<fullyQualifiedTypeName name="java.lang.Object"/>
+<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="MarkovWordModel"/>
+<fullyQualifiedTypeName name="WordGram"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="javax.print.attribute.HashPrintServiceAttributeSet"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,20 @@
+
+public class WordGram {
+	private String[] myWords;
+	private int myHash;
+	public WordGram(String[] source, int start, int size)
+	{
+		myWords = new String[size];
+		System.arraycopy(source, start, myWords, 0, size);
+	}
+	
+	public String wordAt(int index)
+	{
+		if (index<0 || index >= myWords.length)
+		{
+			throw new IndexOutOfBoundsException("bad index" + index);
+		}
+		return myWords[index];
+	}
+
+}
