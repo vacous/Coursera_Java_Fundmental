@@ -27,22 +27,22 @@ public class MarkovRunnerWithInterface {
 		String st = fr.asString();
 //		String st = "abcde";
 		st = st.replace('\n', ' ');
-		int size = 50;
+		int size = 500;
 		
 //        MarkovZero mz = new MarkovZero();
 //        runModel(mz, st, size, false, -1);
 //    
 //        MarkovOne mOne = new MarkovOne();
-//        runModel(mOne, st, size, false, -1);
-//        
-//        MarkovModel mThree = new MarkovModel(3);
-//        runModel(mThree, st, size, false, -1);
-//        
+//        runModel(mOne, st, size, true, 42);
+        
+        MarkovModel mThree = new MarkovModel(6);
+        runModel(mThree, st, size, true, 38);
+        
 //        MarkovFour mFour = new MarkovFour();
-//        runModel(mFour, st, size, false, -1);
+//        runModel(mFour, st, size, true, 25);
 //        
-        EfficientMarkovModel m_efficient = new EfficientMarkovModel(5);
-        runModel(m_efficient, st, size, true, 615);
+//        EfficientMarkovModel m_efficient = new EfficientMarkovModel(5);
+//        runModel(m_efficient, st, size, true, 615);
     }
 
 	private void printOut(String s){

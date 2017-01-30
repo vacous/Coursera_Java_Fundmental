@@ -1,0 +1,10 @@
+import edu.duke.FileResource;
+
+public class test_console {
+	public static void main(String[] args)
+	{	
+		MarkovRunner test_runner = new MarkovRunner();
+		test_runner.runMarkovOne();
+	}
+
+}

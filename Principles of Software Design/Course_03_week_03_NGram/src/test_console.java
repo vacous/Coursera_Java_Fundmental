@@ -6,10 +6,10 @@ public class test_console {
 		FileResource test_file = new FileResource("data/confucius.txt");
 //		String test_string = "This is a test is a test this might";
 		String test_string = test_file.asString();
-		MarkovWordModel test_model = new MarkovWordModel(3);
+		MarkovWordModel test_model = new MarkovWordModel(2);
 		test_model.setTraining(test_string);
-		test_model.setRandom(621);
-		System.out.println(test_model.getRandomText(20));
+		test_model.setRandom(65);
+		System.out.println(test_model.getRandomText(200));
 
 		
 		

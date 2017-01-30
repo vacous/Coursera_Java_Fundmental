@@ -27,22 +27,12 @@ public class MarkovWordModel implements IMarkovModel
 		int index = myRandom.nextInt(myText.length-order);  // random word to start with
 		WordGram key = new WordGram(myText, index, order);
 		string_builder_with_word_gram(sb, key);
-		HashMap<String, ArrayList<String>> store_map = new HashMap<>();
+		HashMap<String, ArrayList<String>> store_map = map_builder();
 		for (int idx = 0; idx < numWords - order; idx += 1)
 		{
-			ArrayList<String> current_follows = new ArrayList<>();
 			String key_in_string = key.toString();
-//			System.out.println(key_in_string);
-			if (!store_map.containsKey(key_in_string))
-			{
-				current_follows = getFollows(key);
-				store_map.put(key_in_string, current_follows);
-			}
-			else
-			{
-				current_follows = store_map.get(key_in_string);
-			}
-			if (current_follows.size() == 0)
+			ArrayList<String> current_follows = store_map.get(key_in_string);
+			if ( current_follows.size() == 0)
 			{
 				break;
 			}
@@ -52,26 +42,47 @@ public class MarkovWordModel implements IMarkovModel
 			sb.append(" ");
 			key = key.shift_add(next_word);
 		}
-//		for (String each_key_string: store_map.keySet())
-//		{
-//			System.out.println(each_key_string);
-//			System.out.println("----------");
-//			for (String each_word: store_map.get(each_key_string))
-//			{
-//				System.out.println(each_word);
-//			}
-//			System.out.println("===================================");
-//		}
 		return sb.toString().trim();
 	}
 	
+	private HashMap<String, ArrayList<String>> map_builder()
+	{
+		int total_len = myText.length;
+		HashMap<String, ArrayList<String>> store_map = new HashMap<>();
+		for (int idx = 0; idx < total_len - order + 1; idx += 1)
+		{
+			WordGram current_gram = new WordGram(myText, idx, order);
+			String current_gram_str = current_gram.toString();
+			ArrayList<String> current_follows =getFollows(current_gram);
+			if ( !store_map.containsKey(current_gram_str))
+			{
+				store_map.put(current_gram_str, current_follows);
+			}
+		}
+		System.out.println("The map size: " + store_map.size());
+		System.out.println("The max follow size: " + largest_len(store_map));
+		return store_map;
+	}
+	
+	private int largest_len(HashMap<String, ArrayList<String>> input_map)
+	{
+		int max_len = 0;
+		for (String each_key:input_map.keySet())
+		{
+			int current_len = input_map.get(each_key).size();
+			if ( current_len > max_len )
+			{
+				max_len = current_len;
+			}
+		}
+		return max_len;
+	}
+	
+	
+	
 	private void string_builder_with_word_gram(StringBuilder input_sb, WordGram word_to_add)
 	{
-		for (int idx = 0; idx < word_to_add.length(); idx +=1)
-		{
-			input_sb.append(word_to_add.wordAt(idx));
-			input_sb.append(" ");
-		}
+		input_sb.append(word_to_add.toString());
 	}
 	
 	public ArrayList<String> getFollows(WordGram key) {

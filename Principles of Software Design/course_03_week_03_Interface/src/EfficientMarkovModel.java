@@ -5,6 +5,8 @@ import java.util.Random;
 
 import javax.print.attribute.HashPrintServiceAttributeSet;
 
+import edu.duke.StorageResource;
+
 public class EfficientMarkovModel extends AbstractMarkovModel{
 
 	private int key_length;
@@ -35,32 +37,31 @@ public class EfficientMarkovModel extends AbstractMarkovModel{
 			String next_char = current_follows.get(index);
 			sb.append(next_char);
 			key = key.substring(1) + next_char;
+//			System.out.println(key);
+//			System.out.println(sb.toString());
+//			System.out.println("---------------");
  		}
-		
-		System.out.println("The HashMap size is: " + store_map.size());
-		System.out.println("The largest length: " + largest_size(store_map));
 		return sb.toString();
 	}
 	
-	private HashMap<String, ArrayList<String>> map_builder()
+	public HashMap<String, ArrayList<String>> map_builder()
 	{
 		HashMap<String, ArrayList<String>> store_map = new HashMap<>();
-		HashSet<String> appear_string = new HashSet<>();
-		
 		for (int idx = 0; idx < myText.length() - key_length; idx += 1)
 		{
-			String current_sub = myText.substring(idx, idx + key_length);
-			appear_string.add(current_sub);
-		}
-		appear_string.add(myText.substring(myText.length() - key_length));
-		int counter = 0;
-		for (String each_appear: appear_string)
-		{
-			ArrayList<String> follows = get_follows(each_appear);
-			store_map.put(each_appear, follows);
-			counter += 1;
-			System.out.println(counter);
-		}
+			String current_key = myText.substring(idx, idx + key_length);
+			ArrayList<String> follows = get_follows(current_key);
+			if (!store_map.containsKey(current_key))
+			{
+				store_map.put(current_key, follows);
+			}
+			System.out.println(idx + "|" + myText.length() + "|" + store_map.size());
+ 		}
+		String tail_string = myText.substring(myText.length()-key_length);
+		store_map.put(tail_string, null);
+		System.out.println("The HashMap size is: " + store_map.size());
+		System.out.println("The largest length: " + largest_size(store_map));
+//		System.out.println(store_map.keySet());
 		return store_map;
 	}
 	

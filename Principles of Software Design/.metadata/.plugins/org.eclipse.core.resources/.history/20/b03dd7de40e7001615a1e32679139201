@@ -1,0 +1,20 @@
+import edu.duke.FileResource;
+
+public class test_console {
+	public static void main(String[] args)
+	{	
+		MarkovRunner test_runner = new MarkovRunner();
+		test_runner.runMarkovZero();
+//		test_runner.runMarkovOne();
+//		test_runner.runMarkovFour();
+		test_runner.runMarkovModel(7);
+//		MarkovModel test_model = new MarkovModel(1);
+//		FileResource input_file = new FileResource("data/confucius.txt");
+//		String input_str = input_file.asString();
+//		input_str = input_str.replace('\n', ' ');
+//		test_model.setTraining(input_str);
+//		test_model.get_follows("he");
+		
+	}
+
+}

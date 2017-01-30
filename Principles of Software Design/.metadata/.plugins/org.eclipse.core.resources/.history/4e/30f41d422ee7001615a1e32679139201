@@ -1,0 +1,15 @@
+import edu.duke.FileResource;
+
+public class test_console {
+	public static void main(String[] args)
+	{
+		FileResource quiz_file = new FileResource("data/confucius.txt");
+		String input_string = quiz_file.asString();
+		System.out.println("Question 2: ");
+		EfficientMarkovModel test_model_char = new EfficientMarkovModel(6);
+		test_model_char.setRandom(38);
+		test_model_char.setTraining(input_string);
+		test_model_char.getRandomText(20);
+	}
+
+}

@@ -1,0 +1,14 @@
+import edu.duke.FileResource;
+
+public class test_console {
+	public static void main(String[] args)
+	{	
+		MarkovModel test_model = new MarkovModel(6);
+		test_model.setRandom(38);
+		FileResource input_file = new FileResource("confucius.txt");
+		String input_str = input_file.asString();
+		test_model.setTraining(input_str);
+		test_model.getRandomText(200);
+	}
+
+}
